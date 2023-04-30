@@ -1,6 +1,8 @@
 import random
 
 class Game():
+    _messages = {'length': '\nNot enough letters!\n', 'center_letter': '\nMust contain center letter!\n', 'invalid_chars': '\nSome characters not allowed!\n', 'found_word': '\nAlready found this word!\n', 'queen_bee': '\nQueen bee! You found all the words and won the game!\n'}
+
     def __init__(self):
         self.pangram = self.setPangram()
         self.center_letter = self.setCenterLetter()

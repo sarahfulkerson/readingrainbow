@@ -48,22 +48,22 @@ def main():
 
         # Check for guesses that are too short
         elif len(command) < 4:
-            print('\nNot enough letters!\n')
+            print(game._messages['length'])
             continue
         
         # Check if the guess has the center letter
         elif game.getCenterLetter() not in command:
-            print('\nMust contain center letter!\n')
+            print(game._messages['center_letter'])
             continue
 
         # Check that all input characters are part of the letter set
         elif not set(command).issubset(set(game.getPangram())):
-            print('\nSome characters not allowed!\n')
+            print(game._messages['invalid_chars'])
             continue
 
         # Check to see if I have already found the input guess
         elif command in game.getFoundWords():
-                print('\nAlready found this word!\n')
+                print(game._messages['found_word'])
 
         # Otherwise, guess is valid word that has not been guessed before   
         else:
@@ -72,7 +72,7 @@ def main():
 
         # Check to see if all words have been found
         if len(game.getFoundWords()) == len(game.getGameWords()):
-            print('\nQueen bee! You found all the words and won the game!\n')
+            print(game._messages['queen_bee'])
             break
 
 main()
