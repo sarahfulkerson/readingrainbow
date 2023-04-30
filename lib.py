@@ -18,16 +18,16 @@ class Game():
     
     def setGameWords(self):
         wordlist_file = open('wordlist.txt','r')
-        gamewordlist = []
+        gameWords = []
 
         for word in wordlist_file:
             word_set = set(word.strip())
             
             if word_set.issubset(set(self.getPangram())) and self.getCenterLetter() in word:
-                gamewordlist.append(word.strip())
+                gameWords.append(word.strip())
 
         wordlist_file.close()
-        return gamewordlist
+        return gameWords
     
     def setLetters(self):
         return ''.join([self.getCenterLetter()] + [x for x in set(self.getPangram())-set(self.getCenterLetter())])
