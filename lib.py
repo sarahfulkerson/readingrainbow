@@ -1,25 +1,56 @@
 import random
 
-def select_pangram():
-    pangrams_file = open('pangrams.txt','r').readlines()
+class Game():
+    def __init__(self):
+        self.pangram = self.setPangram()
+        self.center_letter = self.setCenterLetter()
+        self.game_words = self.setGameWords()
+        self.letters = self.setLetters()
+        self.found_words = []
 
-    return pangrams_file[random.randint(0,len(pangrams_file)-1)].strip()
-
-def select_center_letter(pangram):
-    center_letter = [*set([*pangram])]
+    def setPangram(self):
+        pangrams_file = open('pangrams.txt','r').readlines()
+        return pangrams_file[random.randint(0,len(pangrams_file)-1)].strip()
     
-    return center_letter[0]
+    def setCenterLetter(self):
+        center_letter = [*set([*self.getPangram()])]
+        return center_letter[0]
+    
+    def setGameWords(self):
+        wordlist_file = open('wordlist.txt','r')
+        gamewordlist = []
 
-def generate_game_words(pangram):
-    wordlist_file = open('wordlist.txt','r')
-    gamewordlist_file = open('gamewordlist.txt','w')
+        for word in wordlist_file:
+            word_set = set(word.strip())
+            
+            if word_set.issubset(set(self.getPangram())) and self.getCenterLetter() in word:
+                gamewordlist.append(word.strip())
 
-    for word in wordlist_file:
-        word_set = set(word.strip())
+        wordlist_file.close()
+        return gamewordlist
+    
+    def setLetters(self):
+        return ''.join([self.getCenterLetter()] + [x for x in set(self.getPangram())-set(self.getCenterLetter())])
+    
+    def setFoundWord(self, command):
+        self.found_words.append(command)
         
-        if word_set.issubset(set(pangram)):
-            gamewordlist_file.write(word)
+    def getPangram(self):
+        return self.pangram
+    
+    def getCenterLetter(self):
+        return self.center_letter
+    
+    def getGameWords(self):
+        return self.game_words
+    
+    def getLetters(self):
+        return self.letters
+    
+    def getFoundWords(self):
+        return self.found_words
 
-
-    wordlist_file.close()
-    gamewordlist_file.close()
+    def shuffle(self):
+        other_letters = [x for x in self.letters[1:]]
+        random.shuffle(other_letters)
+        self.letters = self.getCenterLetter() + ''.join([x for x in other_letters])
