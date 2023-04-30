@@ -20,7 +20,8 @@ def main():
         print('Letters: ' + game.getLetters())
         command = input('Input: ').lower()
         
-        if command == 'quit':  # Quit the game
+        # Quit the game
+        if command == 'quit':
             confirm = input('\nAre you sure you want to quit? (y/n): ').lower()
             if confirm == 'y':
                 print("\nThanks for playing!\n")
@@ -28,32 +29,49 @@ def main():
             else:
                 print()
                 continue
-        elif command == 'help':  # Bring up the help text
+
+        # Bring up the help text
+        elif command == 'help':
             print(help)
             continue
-        elif command == 'word list':  # Show me the words I have found
+
+        # Show me the words I have found
+        elif command == 'word list':
             print('\n', game.getFoundWords(), '\n')
             continue
-        elif command == 'shuffle letters':  # Shuffle the non-center letters
+        
+        # Shuffle the non-center letters
+        elif command == 'shuffle letters':
             game.shuffle()
             print()
             continue
-        elif len(command) < 4:  # Check for guesses that are too short
+
+        # Check for guesses that are too short
+        elif len(command) < 4:
             print('\nNot enough letters!\n')
             continue
-        elif game.getCenterLetter() not in command:  # Check if the guess has the center letter
+        
+        # Check if the guess has the center letter
+        elif game.getCenterLetter() not in command:
             print('\nMust contain center letter!\n')
             continue
-        elif not set(command).issubset(set(game.getPangram())):  # Check that all input characters are part of the letter set
+
+        # Check that all input characters are part of the letter set
+        elif not set(command).issubset(set(game.getPangram())):
             print('\nSome characters not allowed!\n')
             continue
-        elif command in game.getFoundWords():  # Check to see if I have already found the input guess
+
+        # Check to see if I have already found the input guess
+        elif command in game.getFoundWords():
                 print('\nAlready found this word!\n')
-        else:  # Otherwise, guess is valid word that has not been guessed before
+
+        # Otherwise, guess is valid word that has not been guessed before   
+        else:
             game.setFoundWord(command)
             print()
 
-        if len(game.getFoundWords()) == len(game.getGameWords()): # Check to see if all words have been found
+        # Check to see if all words have been found
+        if len(game.getFoundWords()) == len(game.getGameWords()):
             print('\nQueen bee! You found all the words and won the game!\n')
             break
 
