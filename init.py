@@ -2,10 +2,10 @@ from lib import Game
 
 help = """
 Enter:
-Word List - print all the words I have found
-Shuffle Letters - shuffle the game letters
-Help - command list
-Quit - quit game
+W (Word List) - print all the words I have found
+S (Shuffle Letters) - shuffle the game letters
+H (Help) - command list
+Q (Quit) - quit game
 
 Anything else to guess a word!
 """
@@ -21,7 +21,7 @@ def main():
         command = input('Input: ').lower()
         
         # Quit the game
-        if command == 'quit':
+        if command == 'q':
             confirm = input('\nAre you sure you want to quit? (y/n): ').lower()
             if confirm == 'y':
                 print("\nThanks for playing!\n")
@@ -31,17 +31,17 @@ def main():
                 continue
 
         # Bring up the help text
-        elif command == 'help':
+        elif command == 'h':
             print(help)
             continue
 
         # Show me the words I have found
-        elif command == 'word list':
+        elif command == 'w':
             print('\n', game.getFoundWords(), '\n')
             continue
         
         # Shuffle the non-center letters
-        elif command == 'shuffle letters':
+        elif command == 's':
             game.shuffle()
             print()
             continue
@@ -67,8 +67,11 @@ def main():
 
         # Otherwise, guess is valid word that has not been guessed before   
         else:
-            game.setFoundWord(command)
-            print()
+            if command in game.getGameWords():
+                game.setFoundWord(command)
+                print(game._messages['new_word'] + command + '\n')
+            else:
+                print(game._messages['invalid_word'])
 
         # Check to see if all words have been found
         if len(game.getFoundWords()) == len(game.getGameWords()):
