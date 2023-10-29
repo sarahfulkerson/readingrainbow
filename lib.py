@@ -1,4 +1,17 @@
+import pickle
 import random
+
+def loadSavedGame():
+    file = open('savedGame', 'rb')
+    savedGame = pickle.load(file)
+    file.close()
+
+    return savedGame
+
+def saveGame(game):
+    file = open('savedGame', 'wb')
+    pickle.dump(game, file)
+    file.close()
 
 class Game():
     _messages = {'length': '\nNot enough letters!\n', 'center_letter': '\nMust contain center letter!\n', 'invalid_chars': '\nSome characters not allowed!\n', 'found_word': '\nAlready found this word!\n', 'queen_bee': '\nQueen bee! You found all the words and won the game!\n', 'new_word': '\nCongrats! You found a word!: ', 'invalid_word': '\nNot a legal word!\n'}
@@ -56,3 +69,15 @@ class Game():
         other_letters = [x for x in self.letters[1:]]
         random.shuffle(other_letters)
         self.letters = self.getCenterLetter() + ''.join([x for x in other_letters])
+    
+    def printFoundWords(self):
+        word_list = self.getFoundWords()
+        word_string = ''
+
+        word_list.sort()
+
+        for word in word_list:
+            word_string = word_string + word + ' '
+        
+        return word_string
+
