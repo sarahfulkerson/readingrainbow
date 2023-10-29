@@ -54,7 +54,7 @@ def main():
                 continue
 
         elif  command == 't':
-            print('\n', game.getGameWords(), '\n')
+            print('\n', game.getGameWords())
             continue
 
         # Bring up the help text
@@ -64,7 +64,7 @@ def main():
 
         # Show me the words I have found
         elif command == 'w':
-            print('\n', game.printFoundWords(), '\n')
+            print('\n', game.printFoundWords())
             continue
         
         # Shuffle the non-center letters
@@ -76,7 +76,7 @@ def main():
         # Save the progress of my current game
         elif command == 'a':
             saveGame(game)
-            print('\n', 'Progress saved!', '\n')
+            print(game._messages['save'])
 
         # Check for guesses that are too short
         elif len(command) < 4:
@@ -101,7 +101,7 @@ def main():
         else:
             if command in game.getGameWords():
                 game.setFoundWord(command)
-                print(game._messages['new_word'] + command + '\n')
+                print(game._messages['new_word'] + command)
             else:
                 print(game._messages['invalid_word'])
 
