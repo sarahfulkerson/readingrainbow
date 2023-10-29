@@ -39,6 +39,7 @@ def main():
     
     # Play the game
     while True:
+        print(game.printGrid())
         print('Letters: ' + game.getLetters())
         command = input('Input: ').lower()
 

@@ -81,3 +81,17 @@ class Game():
         
         return word_string
 
+    def printGrid(self):
+        gameLetters = self.getLetters()
+        grid = """
+            ___   ___
+           / %s \ / %s \\
+           \___/ \___/
+         ___   ___   ___
+        / %s \ / %s \ / %s \\
+        \___/ \___/ \___/
+            ___   ___
+           / %s \ / %s \\
+           \___/ \___/
+        """ % (gameLetters[1], gameLetters[2], gameLetters[3], gameLetters[0], gameLetters[4], gameLetters[5], gameLetters[6])
+        return grid
