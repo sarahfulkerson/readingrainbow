@@ -14,7 +14,14 @@ def saveGame(game):
     file.close()
 
 class Game():
-    _messages = {'length': '\nNot enough letters!\n', 'center_letter': '\nMust contain center letter!\n', 'invalid_chars': '\nSome characters not allowed!\n', 'found_word': '\nAlready found this word!\n', 'queen_bee': '\nQueen bee! You found all the words and won the game!\n', 'new_word': '\nCongrats! You found a word!: ', 'invalid_word': '\nNot a legal word!\n'}
+    _messages = {'length': '\nNot enough letters!', 
+                 'center_letter': '\nMust contain center letter!', 
+                 'invalid_chars': '\nSome characters not allowed!', 
+                 'found_word': '\nAlready found this word!', 
+                 'queen_bee': '\nQueen bee! You found all the words and won the game!', 
+                 'new_word': '\nCongrats! You found a word!: ', 
+                 'invalid_word': '\nNot a legal word!',
+                 'save': '\nProgress saved!'}
 
     def __init__(self):
         self.pangram = self.setPangram()
@@ -81,3 +88,17 @@ class Game():
         
         return word_string
 
+    def printGrid(self):
+        gameLetters = self.getLetters()
+        grid = """
+            ___   ___
+           / %s \ / %s \\
+           \___/ \___/
+         ___   ___   ___
+        / %s \ / %s \ / %s \\
+        \___/ \___/ \___/
+            ___   ___
+           / %s \ / %s \\
+           \___/ \___/
+        """ % (gameLetters[1], gameLetters[2], gameLetters[3], gameLetters[0], gameLetters[4], gameLetters[5], gameLetters[6])
+        return grid
